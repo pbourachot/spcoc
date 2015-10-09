@@ -26,10 +26,16 @@ class DeletePage(webapp2.RequestHandler):
     
     def get(self):        
         journees = spcoc.cleanDB()
-        self.response.out.write("Delete Done.")
+        self.response.out.write("Delete Done.222")
 
 
 class InitPage(webapp2.RequestHandler):
+    
+    def get(self):        
+        journees = spcoc.addAllMatchInDB()
+        self.response.out.write("Init matches Done.")
+        
+class TestPage(webapp2.RequestHandler):
     
     def get(self):        
         journees = spcoc.addAllMatchInDB()

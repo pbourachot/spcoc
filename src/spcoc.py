@@ -10,10 +10,10 @@ import collections
 from google.appengine.ext import ndb
 
 JOUR_DE_LA_SEMAINE = ("Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche")
+
  
 
-matchesURL = {"Senior M 1" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0979b5e6211eae1127b5.html" ,
-              
+matchesURL = { "Senior M 1" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0979b5e6211eae1127b5.html" ,              
                "Senior M 2" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0e61b5e6211eb7cf27b5.html" ,
                "Senior F"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0f9eb5e6211ebb7627b5.html" ,
                             
@@ -37,16 +37,20 @@ class Match(ndb.Model):
 
     category = ndb.StringProperty()
     journee = ndb.StringProperty()
-    date = ndb.DateProperty()    
-    #time = ndb.TimeProperty()
+    date = ndb.DateProperty()        
     locaux = ndb.StringProperty()
     visiteur = ndb.StringProperty()
     isDomicile = ndb.BooleanProperty()
-    fullDate = ndb.DateTimeProperty() 
+    fullDate = ndb.DateTimeProperty()
+    
+    arbitre =  ndb.StringProperty()
+    score =  ndb.StringProperty()
+    plan = ndb.StringProperty()
 
             
     
-def addMatchInDB(category, data):           
+def addMatchInDB(category, data, referee,plan):
+              
     m = Match()
     m.category = category
     m.journee = data[0]
@@ -55,6 +59,10 @@ def addMatchInDB(category, data):
     m.visiteur = data[4]
     m.isDomicile = (data[3] in STRING_LOCAL)
     m.date = datetime.datetime.strptime(data[1], "%d/%m/%Y")
+    m.score = data[5]
+    m.arbitre = referee
+    m.plan = "http://resultats.ffbb.com/here/here_popup.php?id=" + plan[21:-2]
+    
     #print data[2]
     #m.time =  time.mktime(datetime.datetime.strptime(data[1] +" " + data[2], "%d/%m/%Y %H:%M").timetuple()) #time.strptime(data[2], "%H:%M")
     m.put()    
@@ -68,8 +76,15 @@ class MyHTMLParser(HTMLParser):
         HTMLParser.__init__(self)
         self.encours = False
         self.data = []
+        self.referee = None
+        
+        self.nextIsReferee = False
+        self.dataReferee = False
+        
         self.matches = []
         self.category = None
+        
+        self.plan = None
     
     def handle_starttag(self, tag, attrs):        
         if (tag == 'tr') :
@@ -79,24 +94,51 @@ class MyHTMLParser(HTMLParser):
                 if  a[0] == "class" and ( a[1] == "altern-2" or a[1] == "no-altern-2"):                      
                     self.encours = True
                     
-                if  a[0] == "style" and ( a[1] == "display:none"):
-                    displayNone = True
-            
-            if (displayNone) : # Hack for the referee
-                self.encours = False
+                #if  a[0] == "style" and ( a[1] == "display:none"):
+                #    displayNone = True
+                            
+                if  a[0] == "id" and ( a[1][0:5] == "trOff"):                    
+                    self.nextIsReferee = True
+                    
+                if  a[0] == "class" and ( a[1][0:3] == "tit"):                    
+                    self.encours = False
+                
+            #if (displayNone) : # Hack for the referee
+            #    self.encours = False
+                
+        if (tag == 'td' and self.nextIsReferee) :
+            for a in attrs :
+                if  a[0] == "class" and ( a[1] == "infos_complementaires"):                      
+                    self.dataReferee = True
+                    
+        if (self.encours):
+            if (tag == 'a') :
+                for a in attrs :
+                    if  (a[0] == "href"):                      
+                        self.plan = a[1]
                     
     def handle_endtag(self, tag):        
-        if (self.encours and tag == 'tr' ):
-            self.encours = False                 
+        if (tag == 'tr' and self.nextIsReferee):                             
             if (len(self.data)> 0):                                   
-                if (self.category):                
-                    addMatchInDB(self.category, self.data)
+                if (self.category):
+                    print "addMatchInDB"
+                    addMatchInDB(self.category, self.data, self.referee, self.plan)
                     
             self.data = []
+            self.referee = None
+            self.dataReferee  = False
+            self.nextIsReferee = False
+            self.plan = None
+        
+#        if (self.encours and tag == 'tr' ):
+#            nextIsReferee = False
+#            self.referee = None
             
     def handle_data(self, data):
         if (self.encours):
             self.data.append(data)
+        if (self.dataReferee):            
+            self.referee = data
         
     def listOfMatches(self, html):
         
@@ -196,5 +238,7 @@ def addAllMatchInDB():
         parser.close()
 
 def cleanDB():
-    ndb.delete_multi(Match.query().fetch(keys_only=True))    
+    ndb.delete_multi(Match.query().fetch(keys_only=True))
+    
+        
 #display( matchDeLaSemaine())

@@ -29,7 +29,9 @@ html {
     		<td>Heure</td>
     		<td>Category</td>	       	
 	       	<td>Domicile</td>	       	
-	       	<td>Visiteur</td>    	
+	       	<td>Visiteur</td>
+	       	<td>Arbitre</td>    	
+	       	<td>Plan</td>
     	</tr>
 
 	{% for journee, (domicile, exterieur) in data.iteritems() %}
@@ -38,7 +40,7 @@ html {
     	{% if domicile %}
     	
     	<tr>
-    		<td colspan="3"> {{journee}} : Gymnase </td>
+    		<td colspan="3"> {{journee.strftime('%d/%m/%Y')}} : Gymnase </td>
     	</tr>
     	    	
     	{% for m in domicile %}
@@ -48,6 +50,8 @@ html {
 		       		       	
 		       	<td>{{ m.locaux }} </td>	       	
 		       	<td>{{ m.visiteur }} </td>
+		       	<td>{{ m.arbitre }}</td>
+		       	<td><a href="{{ m.plan }}" target="_blank">Plan</a></td>
 	       	</tr>
        	{% endfor %}
        	{% endif %}
@@ -56,7 +60,7 @@ html {
        	{% if exterieur %}
     	
     	<tr>
-    		<td colspan="3"> {{journee}} : Exterieur </td>
+    		<td colspan="3"> {{journee.strftime('%d/%m/%Y')}} : Exterieur </td>
     	</tr>
     	
     	
@@ -67,6 +71,8 @@ html {
 	       		       	
 	       	<td>{{ m.locaux }} </td>	       	
 	       	<td>{{ m.visiteur }} </td>
+	       	<td>{{ m.arbitre }}</td>
+		    <td><a href="{{ m.plan }}" target="_blank">Plan</a></td>
        	</tr>
        	{% endfor %}
        	{% endif %}	
