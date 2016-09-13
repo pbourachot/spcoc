@@ -7,6 +7,9 @@ import operator
 import datetime
 import collections
 
+
+from spcocModel import Equipe
+
 from google.appengine.ext.db import Key
 from google.appengine.ext import ndb
 from gettext import Catalog
@@ -97,11 +100,6 @@ class Match(ndb.Model):
     
     gueriniere = False
 
-
-class Equipe(ndb.Model):
-    
-    nom = ndb.StringProperty()
-    url = ndb.StringProperty()
 
 
 
@@ -365,8 +363,9 @@ def addAllMatchInDB():
 
 
 def deleteEquipe(equipe):
-    query = Equipe.query(Equipe.nom = equipe)
-    equipes = query.fetch()
+    print "done"
+    #query = Equipe.query(Equipe.nom = equipe)
+    #equipes = query.fetch()
     #for e in equipes :
     #    e.key.delete()
     

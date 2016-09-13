@@ -1,0 +1,3 @@
+== Command to deploy application ==
+
+sudo gcloud app deploy --project spcoc-1084 --version 2

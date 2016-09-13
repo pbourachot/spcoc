@@ -20,7 +20,7 @@
 
 	{% for eq in equipes %}
     <tr>
-    	<form action="/deleteEquipe?equipe={{eq.key().nom}}">
+    	<form action="/deleteEquipe?equipe={{eq.nom}}">
 	        <td>{{eq.nom}} </td>
 		    <td>{{eq.url }} </td>
 		    <input type="submit" value="Delete">

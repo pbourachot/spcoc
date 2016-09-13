@@ -1,1 +1,1 @@
-This is a test with gitHub.
+print "This is a test with gitHub."
