@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<link rel='stylesheet' id='sport_widgets_plugin_style-css'  href='/stylesheets/style.css' type='text/css' media='all' />
+
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
+<meta content="fr" http-equiv="Content-Type"></meta>
+<title>SPCOC Basket</title>
+</head>
+{% autoescape true %}
+
+  <body>
+  
+  
+
+	<form action="/addEquipe">
+		    <input type="submit" value="Ajoute une nouvelle equipe">
+		</form>
+
+	{% for eq in equipes %}
+    <tr>
+    	<form action="/deleteEquipe?equipe={{eq.key().nom}}">
+	        <td>{{eq.nom}} </td>
+		    <td>{{eq.url }} </td>
+		    <input type="submit" value="Delete">
+		</form>
+		       	
+	</tr>
+       	
+    
+    {% endfor %}
+    
+     
+
+     
+    
+    
+    
+
+
+  </body>
+</html>
+{% endautoescape %}

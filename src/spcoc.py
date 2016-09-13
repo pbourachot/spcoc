@@ -7,6 +7,7 @@ import operator
 import datetime
 import collections
 
+from google.appengine.ext.db import Key
 from google.appengine.ext import ndb
 from gettext import Catalog
 
@@ -96,7 +97,23 @@ class Match(ndb.Model):
     
     gueriniere = False
 
-            
+
+class Equipe(ndb.Model):
+    
+    nom = ndb.StringProperty()
+    url = ndb.StringProperty()
+
+
+
+def initEquipe():
+    
+    ndb.delete_multi(Equipe.query().fetch(keys_only=True))
+    for key in matchesURL.keys():
+        e = Equipe()
+        e.nom = key
+        e.url = matchesURL[key]
+        e.put()
+        
     
 def addMatchInDB(category, data, referee,plan):
               
@@ -346,6 +363,22 @@ def addAllMatchInDB():
         f.close()
         parser.close()
 
+
+def deleteEquipe(equipe):
+    query = Equipe.query(Equipe.nom = equipe)
+    equipes = query.fetch()
+    #for e in equipes :
+    #    e.key.delete()
+    
+    #Key(equipe).delete()
+    
+def addEquipe():
+    e = Equipe()
+    e.nom = "Nom"
+    e.url = "URL FFBB"
+    e.put()
+    
+
 def cleanDB():
     ndb.delete_multi(Match.query().fetch(keys_only=True))
     
@@ -414,6 +447,13 @@ def findMatchGueriniere(cat, journee):
     
     matches = query.fetch()
     return matches
+
+
+def equipes():
+    query = Equipe.query()
+    equipes = query.fetch()
+    return equipes
+
 
 def isGueriniere(cat, journee):    
     return len(findMatchGueriniere(cat, journee)) == 1

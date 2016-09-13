@@ -99,16 +99,44 @@ class UpdatePage(webapp2.RequestHandler):
 class StatsPage(webapp2.RequestHandler):
     
     def get(self):
-        #journees = spcoc.cleanDB()        
-        #journees = spcoc.addAllMatchInDB()
-        
-       
-        
+
+
          self.response.write(spcoc.stats())
+
+class InitEquipe(webapp2.RequestHandler):
+
+    def get(self):
+         spcoc.initEquipe()
+
+class DisplayEquipe(webapp2.RequestHandler):
+    
+    def get(self):
         
         
-        #self.response.out.write("Init matches Done.")
+        equipes = spcoc.equipes()
         
+        template_values = {
+            'equipes': equipes            
+        }
+        
+        template = JINJA_ENVIRONMENT.get_template('equipes.html')        
+        self.response.write(template.render(template_values))
+        
+class DeleteEquipe(webapp2.RequestHandler):
+    
+    def get(self):
+        key = self.request.get("equipe")
+        spcoc.deleteEquipe(key)
+        self.redirect("/displayEquipe")
+
+class AddEquipe(webapp2.RequestHandler):
+    
+    def get(self):
+        
+        spcoc.addEquipe()
+        self.redirect("/displayEquipe")
+        
+
         
 class Check(webapp2.RequestHandler):
     
@@ -133,7 +161,16 @@ app = webapp2.WSGIApplication([('/', MainPage),
                                ('/admin', AdminPage),
                                ('/update', UpdatePage),
                                ('/stats', StatsPage),
-                               ('/check', Check) ]
+                               ('/check', Check), 
+                               
+                               # Equipe management
+                               ('/initEquipe', InitEquipe),
+                               ('/displayEquipe', DisplayEquipe),
+                               ('/addEquipe', AddEquipe),
+                               ('/deleteEquipe', DeleteEquipe),
+                               
+                               
+                               ]
                               , debug=True)
 
 
