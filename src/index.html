@@ -2,8 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <script type="text/javascript" src="/js/resultat.js?JSVersion=1.0"></script>
+<script src="http://78.231.81.234:8085/target/target-script-min.js#anonymous"></script>
 <link rel="stylesheet" type="text/css"
 	href="/css/resultat.css?CSSVersion=1.0"></link>
+	
+	
 <style type="text/css">
 html {
 	background: #E7E7E7;
@@ -18,72 +21,13 @@ html {
 {% autoescape true %}
 
   <body>
+
+
+<a href="/init" ">Reinitialisation des donnees</a>
+<a href="/next" ">Prochain matches</a>
+<a href="/dernierResultat" ">Dernier resultat</a>
+<a href="/admin" ">Admin</a>
   
-    <table>
-    <tbody>
-    
-    
-    	
-    	<tr>
-    		
-    		<td>Heure</td>
-    		<td>Category</td>	       	
-	       	<td>Domicile</td>	       	
-	       	<td>Visiteur</td>
-	       	<td>Arbitre</td>    	
-	       	<td>Plan</td>
-    	</tr>
-
-	{% for journee, (domicile, exterieur) in data.iteritems() %}
-	
-    	
-    	{% if domicile %}
-    	
-    	<tr>
-    		<td colspan="3"> {{journee.strftime('%d/%m/%Y')}} : Gymnase </td>
-    	</tr>
-    	    	
-    	{% for m in domicile %}
-	        <tr>
-	        	<td>{{ m.fullDate.strftime('%H:%M') }} </td>
-		       	<td>{{ m.category }} </td>
-		       		       	
-		       	<td>{{ m.locaux }} </td>	       	
-		       	<td>{{ m.visiteur }} </td>
-		       	<td>{{ m.arbitre }}</td>
-		       	<td><a href="{{ m.plan }}" target="_blank">Plan</a></td>
-	       	</tr>
-       	{% endfor %}
-       	{% endif %}
-       	
-       	
-       	{% if exterieur %}
-    	
-    	<tr>
-    		<td colspan="3"> {{journee.strftime('%d/%m/%Y')}} : Exterieur </td>
-    	</tr>
-    	
-    	
-    	{% for m in exterieur %}
-        <tr>
-        	<td>{{ m.fullDate.strftime('%H:%M') }} </td>
-	       	<td>{{ m.category }} </td>
-	       		       	
-	       	<td>{{ m.locaux }} </td>	       	
-	       	<td>{{ m.visiteur }} </td>
-	       	<td>{{ m.arbitre }}</td>
-		    <td><a href="{{ m.plan }}" target="_blank">Plan</a></td>
-       	</tr>
-       	{% endfor %}
-       	{% endif %}	
-    
-    {% endfor %}
-    
-    </tbody>
-    </table>
-
-     
-    
     
     
 

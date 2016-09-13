@@ -1,12 +1,18 @@
 application: spcoc-1084
-version: 1
+version: 2
 runtime: python27
 api_version: 1
 threadsafe: true
 
 handlers:
-- url: /.*
+
+- url: /stylesheets
+  static_dir: stylesheets
+
+- url: /.*  
   script: spcocMain.app
+  
+
 
 libraries:
 - name: webapp2

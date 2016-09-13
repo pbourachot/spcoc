@@ -5,3 +5,6 @@ cron:
 - description: Init database
   url: /init
   schedule: every day 01:01
+- description: Check Website
+  url: /check
+  schedule: every 5 mins

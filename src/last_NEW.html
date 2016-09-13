@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<!--  <link rel='stylesheet' id='sport_widgets_plugin_style-css'  href='http://spcocbasket.fr/wp-content/themes/sport/style.css?ver=4.3.1' type='text/css' media='all' /> -->
+<link rel='stylesheet' id='sport_widgets_plugin_style-css'  href='/stylesheets/style.css' type='text/css' media='all' />
+
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
+<meta content="fr" http-equiv="Content-Type"></meta>
+<title>SPCOC Basket</title>
+</head>
+{% autoescape true %}
+
+  <body>
+  
+    <div class="price-table">
+  
+   
+	{% for journee, matches in data.iteritems() %}	
+    	{% for m in matches %}
+	        <div class="price-row">	
+	        	<div class="price-cell">{{journee.strftime('%d/%m/%y')}} </div>
+		       	<div class="price-cell" {% if m.vainqueur == 1 %} style="font-weight:bold;"{% endif %}>{{ m.locaux }} </div>
+		       	<div class="price-cell">{{ m.score }}</div>	       	
+		       	<div class="price-cell" {% if m.vainqueur == 2 %} style="font-weight:bold;"{% endif %}>{{ m.visiteur }} </div>
+	       	</div>
+       	{% endfor %}
+    {% endfor %}
+    
+   </div>
+
+
+
+
+  </body>
+</html>
+{% endautoescape %}

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript" src="/js/resultat.js?JSVersion=1.0"></script>
+<link rel="stylesheet" type="text/css"
+	href="/css/resultat.css?CSSVersion=1.0"></link>
+<style type="text/css">
+html {
+	background: #E7E7E7;
+	background-image: none
+}
+);
+</style>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
+<meta content="fr" http-equiv="Content-Type"></meta>
+<title>SPCOC Basket</title>
+</head>
+{% autoescape true %}
+
+  <body>
+  
+    <table>
+    <tbody>
+    
+    
+    	
+    	<tr>    		
+    		<td>Date</td>
+    		<td>Category</td>	       	
+	       	<td>Domicile</td>	       	
+	       	<td>Visiteur</td>
+	       	<td>Score</td>    		       	
+    	</tr>
+
+	{% for journee, matches in data.iteritems() %}
+	
+    	
+    	{% for m in matches %}
+	        <tr>
+	        	<td>{{journee.strftime('%d/%m/%Y')}} </td>
+		       	<td>{{ m.category }} </td>		       		       	
+		       	<td>{{ m.locaux }} </td>	       	
+		       	<td>{{ m.visiteur }} </td>
+		       	<td>{{ m.score }}</td>
+	       	</tr>
+       	{% endfor %}
+       	
+       	
+       	
+       
+    
+    {% endfor %}
+    
+    </tbody>
+    </table>
+
+     
+    
+    
+    
+
+
+
+  </body>
+</html>
+{% endautoescape %}

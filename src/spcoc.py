@@ -8,30 +8,75 @@ import datetime
 import collections
 
 from google.appengine.ext import ndb
+from gettext import Catalog
 
 JOUR_DE_LA_SEMAINE = ("Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche")
 
  
 
-matchesURL = { "Senior M 1" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0979b5e6211eae1127b5.html" ,              
-               "Senior M 2" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0e61b5e6211eb7cf27b5.html" ,
-               "Senior F"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0f9eb5e6211ebb7627b5.html" ,
-                            
-                            
-               "U17 M"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0e5fb5e6211eb7cc27b5.html" ,
-               "U17 F"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0ef2b5e6211eb97727b5.html" ,
-               "U15"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0ee1b5e6211eb95527b5.html" ,
-               "U13 M1"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0ee8b5e6211eb96827b5.html" ,
-               "U13 M2"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0ee9b5e6211eb96a27b5.html" ,
-               "U11 1"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0eebb5e6211eb96d27b5.html" ,
-               "U11 2"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0eecb5e6211eb96f27b5.html" ,
-                                          
+matchesURL = { "SM 1" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0979b5e6211eae1127b5.html" ,              
+               "SM 2" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0e61b5e6211eb7cf27b5.html" ,
+               "SF"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0f9eb5e6211ebb7627b5.html" ,
+               
+              "U17 M"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1a60b5e6211ecea927b5.html" ,
+               "U17 F"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e19a7b5e6211eccd527b5.html" ,
+               "U15"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1a67b5e6211eceb027b5.html" ,
+               "U13 M1"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1a6cb5e6211eceb827b5.html" ,
+               "U13 M2"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1a9fb5e6211ecefe27b5.html" ,
+               "U13 F"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e19b0b5e6211ecce327b5.html" ,               
+               "U11 1"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1aa2b5e6211ecf0327b5.html" ,
+               "U11 2"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1aa3b5e6211ecf0527b5.html" ,               
+               
+              "U17 M - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0e5fb5e6211eb7cc27b5.html" ,
+               "U17 F - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0ef2b5e6211eb97727b5.html" ,
+               "U15 - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0ee1b5e6211eb95527b5.html" ,
+               "U13 M1 - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0ee8b5e6211eb96827b5.html" ,
+               "U13 M2 - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0ee9b5e6211eb96a27b5.html" ,
+               "U13 F - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1340b5e6211ec27527b5.html" ,               
+               "U11 1 - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0eebb5e6211eb96d27b5.html" ,
+               "U11 2 - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0eecb5e6211eb96f27b5.html" ,                                          
               }
 
 STRING_LOCAL = ["SAINT PAUL LA COLLE OLYMPIQUE CB", "EN - SAINT PAUL LA COLLE OLYMPIQUE CB"]
 
+ABREV = "SPCOC"
+
+# 0 : Pas de vainqueur
+# 1 : Domicile  
+# 2 : Visiteur
+def findVainqueur(score):
+    vainqueur = 0
+    index = score.index('-')
+
+    if (index > 0):
+        score1S = score[:index-1]
+        score2S = score[index+2:]
+        
+        if (int(score1S) > (int(score2S))):
+           vainqueur = 1
+        else :
+           vainqueur = 2
+    return vainqueur
 
 
+def score(score):
+    print score
+    score1S = -1;    
+    score2S = -1;
+    index = score.index('-')
+
+    if (index > 0):
+        score1S = score[:index-1]
+        score2S = score[index+2:]
+    print score1S
+    print score2S
+    return int(score1S) , int(score2S)
+
+
+class MatchGueriniere(ndb.Model):
+    category = ndb.StringProperty()
+    journee = ndb.StringProperty()
+    
     
 class Match(ndb.Model):
 
@@ -46,6 +91,10 @@ class Match(ndb.Model):
     arbitre =  ndb.StringProperty()
     score =  ndb.StringProperty()
     plan = ndb.StringProperty()
+    
+    vainqueur = ndb.IntegerProperty() 
+    
+    gueriniere = False
 
             
     
@@ -62,9 +111,7 @@ def addMatchInDB(category, data, referee,plan):
     m.score = data[5]
     m.arbitre = referee
     m.plan = "http://resultats.ffbb.com/here/here_popup.php?id=" + plan[21:-2]
-    
-    #print data[2]
-    #m.time =  time.mktime(datetime.datetime.strptime(data[1] +" " + data[2], "%d/%m/%Y %H:%M").timetuple()) #time.strptime(data[2], "%H:%M")
+    m.vainqueur = findVainqueur(data[5])
     m.put()    
     
 from HTMLParser import HTMLParser
@@ -120,8 +167,7 @@ class MyHTMLParser(HTMLParser):
     def handle_endtag(self, tag):        
         if (tag == 'tr' and self.nextIsReferee):                             
             if (len(self.data)> 0):                                   
-                if (self.category):
-                    print "addMatchInDB"
+                if (self.category):                    
                     addMatchInDB(self.category, self.data, self.referee, self.plan)
                     
             self.data = []
@@ -170,13 +216,27 @@ def matchesFromDate(date, matches):
 
 
 # Return list of match from date to date + end
-def returnWeekMatch(date = datetime.datetime.now(),  end =  7 ):
+def returnComingMatch(date = datetime.datetime.now(),  end =  7 ):
     
     query = Match.query(ndb.AND(Match.fullDate >= date),
             Match.fullDate < date + datetime.timedelta(days=end)).order(Match.fullDate)
     
     return query.fetch()
 
+# Return list of match from date to date + end
+def returnPreviousMatch(date = datetime.datetime.now(),  beginning =  7 ):
+    
+    #query = Match.query(ndb.AND(Match.fullDate <= date),
+    #        Match.fullDate > date + datetime.timedelta(days=beginning*-1)).order(Match.fullDate)
+            
+    query = Match.query(Match.fullDate <= date).order(-Match.fullDate)
+    
+    return query.fetch(10)
+
+
+def returnAllMatches(date = datetime.datetime.now()):    
+    query = Match.query(Match.fullDate >= date).order(-Match.fullDate)    
+    return query.fetch()
         
 def display(result):
     output = ""
@@ -210,21 +270,70 @@ def matchDeLaSemaine(matchesURL = matchesURL):
     journee = {}
     
 
-    for m in returnWeekMatch() :
+    for m in returnComingMatch() :
+        m = updateGueriniere(m)
+        print "gueriniere ?"
+        print m.gueriniere
         if journee.has_key(m.date) :
-            domicile , exterieur = journee[m.date]
+            domicile , gueriniere, exterieur = journee[m.date]
         else :
             domicile = []
             exterieur = []
+            gueriniere = []
         
-        if m.isDomicile :
+        if m.isDomicile and not m.gueriniere:
             domicile.append(m)
+        elif m.isDomicile and m.gueriniere :
+            gueriniere.append(m)
         else :
             exterieur.append(m)
-        journee[m.date] = ( domicile , exterieur )
+        journee[m.date] = ( domicile , gueriniere, exterieur )
             
      
     #return journee
+    return collections.OrderedDict(sorted(journee.items())) 
+
+
+def LastResult(matchesURL = matchesURL):
+
+    
+    journee = {}
+    
+
+    for m in returnPreviousMatch() :
+        if journee.has_key(m.date) :
+            matches = journee[m.date]
+        else :
+            matches = []        
+        if (m.score != "-"):    
+            matches.append(m)        
+            journee[m.date] = ( matches )
+            
+     
+    
+    return collections.OrderedDict(sorted(journee.items(), reverse=True)) 
+
+def AllMatchesAtHome(matchesURL = matchesURL):
+
+    
+    journee = {}
+    
+
+    for m in returnAllMatches() :
+        
+        m = updateGueriniere(m)
+        
+        if journee.has_key(m.date) :
+            matches = journee[m.date]
+        else :
+            matches = []
+        
+        if (m.isDomicile) :
+            matches.append(m)        
+            journee[m.date] = ( matches )
+            
+     
+    
     return collections.OrderedDict(sorted(journee.items())) 
 
 
@@ -240,5 +349,115 @@ def addAllMatchInDB():
 def cleanDB():
     ndb.delete_multi(Match.query().fetch(keys_only=True))
     
+    
+def replaceSPCOCDomExt(journees):
+    
+    for k in journees.keys():
+        dom,gue, ext = journees[k]
         
+        for m in dom :
+            
+            if (m.locaux in STRING_LOCAL):
+                m.locaux = ABREV + " " + m.category
+            if (m.visiteur in STRING_LOCAL):
+                m.visiteur = ABREV + " " + m.category
+        
+        for m in gue :
+            
+            if (m.locaux in STRING_LOCAL):
+                m.locaux = ABREV + " " + m.category
+            if (m.visiteur in STRING_LOCAL):
+                m.visiteur = ABREV + " " + m.category
+        
+                
+        for m in ext :
+            
+            if (m.locaux in STRING_LOCAL):
+                m.locaux = ABREV + " " + m.category
+            if (m.visiteur in STRING_LOCAL):
+                m.visiteur = ABREV + " " + m.category
+                
+    return journees
+    
+    
+def replaceSPCOC(journees):
+    
+    for k in journees.keys():
+        matches = journees[k]
+        for m in matches :
+            
+            if (m.locaux in STRING_LOCAL):
+                m.locaux = ABREV + " " + m.category
+            if (m.visiteur in STRING_LOCAL):
+                m.visiteur = ABREV + " " + m.category
+                  
+    return journees
+
+
+
+def update(gueriniere, cat, journee):
+    
+    if (gueriniere == "1"):
+        m = MatchGueriniere()
+        m.category = cat
+        m.journee = journee        
+        m.put()
+    else :
+    
+        matches = findMatchGueriniere(cat, journee)
+        for m in matches :
+            m.key.delete()
+
+def findMatchGueriniere(cat, journee):
+    query = MatchGueriniere.query(ndb.AND(MatchGueriniere.journee == journee,
+                                          MatchGueriniere.category == cat))
+    
+    matches = query.fetch()
+    return matches
+
+def isGueriniere(cat, journee):    
+    return len(findMatchGueriniere(cat, journee)) == 1
+                   
+                   
+def updateGueriniere(m):    
+    if isGueriniere(m.category, m.journee):
+        print "OKKKKK"
+        print m.category
+        print m.journee
+        m.gueriniere = True
+    return m
+                       
 #display( matchDeLaSemaine())
+
+def stats():
+    result = ""
+    cat = {}
+    
+    date = datetime.datetime.now()
+    query = Match.query(Match.fullDate < date ).order(Match.fullDate)
+    
+    m = query.fetch()
+    sV = -1
+    sL = -1
+    match = 0
+    laColle = 0
+    other = 0
+    for mm in m :
+        sV = -1
+        sL = -1
+        
+        if (mm.isDomicile) :
+            sL, sV = score(mm.score)
+        else : 
+            sV, sL = score(mm.score)
+            
+        if (sL != -1):
+            print mm
+            laColle += sL
+            other += sV
+            match += 1
+            print match
+            print laColle
+            print other
+            
+    return " Match " + str(match) + " La colle " + str(laColle) + " - " + str(other)

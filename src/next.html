@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<!--  <link rel='stylesheet' id='sport_widgets_plugin_style-css'  href='http://spcocbasket.fr/wp-content/themes/sport/style.css?ver=4.3.1' type='text/css' media='all' /> -->
+<link rel='stylesheet' id='sport_widgets_plugin_style-css'  href='/stylesheets/style.css' type='text/css' media='all' />
+
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"></meta>
+<meta content="fr" http-equiv="Content-Type"></meta>
+<title>SPCOC Basket</title>
+</head>
+{% autoescape true %}
+
+  <body>
+  
+  
+      	
+    
+    
+    
+    	
+    	
+
+	{% for journee, (domicile,gueriniere, exterieur) in data.iteritems() %}
+	
+    	
+    	{% if domicile %}
+  			<div class="title">	
+	    		 {{journee.strftime('%d/%m/%Y')}} : Domicile Gymnase 
+	    	</div>
+    	<div class="price-table">	    	
+    	{% for m in domicile %}
+	        <div class="price-row">	
+	        	<div class="price-cell">{{ m.fullDate.strftime('%H:%M') }} </div>
+		       	<div class="price-cell"><b>{{ m.locaux }}</b></div>       	
+		       	<div class="price-cell">{{ m.visiteur }} </div>
+		       	<div class="price-cell"><a href="{{ m.plan }}" target="_blank">Plan</a></div>
+		       	<!--  <div class="price-cell">{{ m.arbitre }}</div> -->
+		       	
+	       	</div>
+       	{% endfor %}
+       	</div>
+       	{% endif %}
+       	
+    	{% if gueriniere %}
+  			<div class="title">	
+	    		 {{journee.strftime('%d/%m/%Y')}} : Domicile Gueriniere 
+	    	</div>
+    	<div class="price-table">	    	
+    	{% for m in gueriniere %}
+	        <div class="price-row">	
+	        	<div class="price-cell">{{ m.fullDate.strftime('%H:%M') }} </div>
+		       	<div class="price-cell"><b>{{ m.locaux }}</b></div>       	
+		       	<div class="price-cell">{{ m.visiteur }} </div>
+		       	<div class="price-cell"><a href="{{ m.plan }}" target="_blank">Plan</a></div>
+		       	<!--  <div class="price-cell">{{ m.arbitre }}</div> -->
+		       	
+	       	</div>
+       	{% endfor %}
+       	</div>
+       	{% endif %}
+
+
+       	
+       	{% if exterieur %}
+    	<div class="title">	
+	    		 {{journee.strftime('%d/%m/%Y')}} : Exterieur 
+	    	</div>
+	    <div class="price-table">		
+    	{% for m in exterieur %}
+        <div class="price-row">	
+        	<div class="price-cell">{{ m.fullDate.strftime('%H:%M') }} </div>	       		       		       	
+	       	<div class="price-cell">{{ m.locaux }} </div>	       	
+	       	<div class="price-cell"><b>{{ m.visiteur }}</b></div>
+	       	<div class="price-cell"><a href="{{ m.plan }}" target="_blank">Plan</a></div>
+	       	<!--  <div class="price-cell">{{ m.arbitre }}</div> -->
+		    
+       	</div>
+       	{% endfor %}
+       	</div>
+       	{% endif %}	
+       	
+    
+    {% endfor %}
+    
+     
+
+     
+    
+    
+    
+
+
+  </body>
+</html>
+{% endautoescape %}
