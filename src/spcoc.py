@@ -18,28 +18,37 @@ JOUR_DE_LA_SEMAINE = ("Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi
 
  
 
-matchesURL = { "SM 1" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0979b5e6211eae1127b5.html" ,              
-               "SM 2" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0e61b5e6211eb7cf27b5.html" ,
-               "SF"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0f9eb5e6211ebb7627b5.html" ,
+matchesURL = { "SM 1" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e38bab5e6211ef62f27b5.html" ,
+               "U17" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e41b3b5e6211f09d727b5.html" ,
+               "U15 M1" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e41a3b5e6211f09af27b5.html" ,
+               "U15 M2" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e41a7b5e6211f09b827b5.html" ,
+               "U13 M" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e41aeb5e6211f09c327b5.html" ,
+               "SF"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e37bfb5e6211ef46527b5.html" 
+               }
+
+
+
+#               "SM 2" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0e61b5e6211eb7cf27b5.html" ,
+#               "SF"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0f9eb5e6211ebb7627b5.html" ,
                
-              "U17 M"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1a60b5e6211ecea927b5.html" ,
-               "U17 F"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e19a7b5e6211eccd527b5.html" ,
-               "U15"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1a67b5e6211eceb027b5.html" ,
-               "U13 M1"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1a6cb5e6211eceb827b5.html" ,
-               "U13 M2"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1a9fb5e6211ecefe27b5.html" ,
-               "U13 F"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e19b0b5e6211ecce327b5.html" ,               
-               "U11 1"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1aa2b5e6211ecf0327b5.html" ,
-               "U11 2"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1aa3b5e6211ecf0527b5.html" ,               
+#              "U17 M"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1a60b5e6211ecea927b5.html" ,
+#               "U17 F"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e19a7b5e6211eccd527b5.html" ,
+#               "U15"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1a67b5e6211eceb027b5.html" ,
+#               "U13 M1"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1a6cb5e6211eceb827b5.html" ,
+#               "U13 M2"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1a9fb5e6211ecefe27b5.html" ,
+#               "U13 F"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e19b0b5e6211ecce327b5.html" ,               
+#               "U11 1"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1aa2b5e6211ecf0327b5.html" ,
+#               "U11 2"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1aa3b5e6211ecf0527b5.html" ,               
                
-              "U17 M - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0e5fb5e6211eb7cc27b5.html" ,
-               "U17 F - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0ef2b5e6211eb97727b5.html" ,
-               "U15 - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0ee1b5e6211eb95527b5.html" ,
-               "U13 M1 - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0ee8b5e6211eb96827b5.html" ,
-               "U13 M2 - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0ee9b5e6211eb96a27b5.html" ,
-               "U13 F - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1340b5e6211ec27527b5.html" ,               
-               "U11 1 - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0eebb5e6211eb96d27b5.html" ,
-               "U11 2 - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0eecb5e6211eb96f27b5.html" ,                                          
-              }
+#              "U17 M - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0e5fb5e6211eb7cc27b5.html" ,
+#               "U17 F - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0ef2b5e6211eb97727b5.html" ,
+#               "U15 - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0ee1b5e6211eb95527b5.html" ,
+#               "U13 M1 - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0ee8b5e6211eb96827b5.html" ,
+#               "U13 M2 - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0ee9b5e6211eb96a27b5.html" ,
+#               "U13 F - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e1340b5e6211ec27527b5.html" ,               
+#               "U11 1 - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0eebb5e6211eb96d27b5.html" ,
+#               "U11 2 - old"   : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e0eecb5e6211eb96f27b5.html" ,                                          
+#              }
 
 STRING_LOCAL = ["SAINT PAUL LA COLLE OLYMPIQUE CB", "EN - SAINT PAUL LA COLLE OLYMPIQUE CB"]
 
