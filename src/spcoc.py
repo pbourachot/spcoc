@@ -297,16 +297,23 @@ def display(result):
     return output
     
 
+def removeExempt(list):
+	newList = []
+	for a in list :
+		if (a.visiteur != 'Exempt' and a.locaux != 'Exempt'):
+			newList.append(a)
+	return newList
+
+
 def matchDeLaSemaine(matchesURL = matchesURL):
 
     
     journee = {}
     
+    filteredReturnComingMatch = removeExempt(returnComingMatch()) 
 
-    for m in returnComingMatch() :
+    for m in filteredReturnComingMatch :
         m = updateGueriniere(m)
-        print "gueriniere ?"
-        print m.gueriniere
         if journee.has_key(m.date) :
             domicile , gueriniere, exterieur = journee[m.date]
         else :

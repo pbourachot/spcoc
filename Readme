@@ -1,3 +1,8 @@
 == Command to deploy application ==
 
-sudo gcloud app deploy --project spcoc-1084 --version 2
+gcloud app deploy --project spcoc-1084 --version 2
+
+
+== To run it locally ==
+
+dev_appserver.py . (on src dir)
