@@ -23,15 +23,28 @@ matchesURL = {
 			   "SM 1" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e38bab5e6211ef62f27b5.html" ,
 			   "SM 2" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e42adb5e6211f0c7f27b5.html" ,
 			   
-               "U17" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e41b3b5e6211f09d727b5.html" ,
+			   
+			   
+               "U17" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e4d4fb5e6211f1d8227b5.html" ,
                
-               "U15 M1" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e41a3b5e6211f09af27b5.html" ,
-               "U15 M2" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e41a7b5e6211f09b827b5.html" ,
-               "U15 F" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e42d0b5e6211f0cb827b5.html" ,
+               "U15 M1" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e4d78b5e6211f1e4b27b5.html" ,
+               "U15 M2" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e4d84b5e6211f1ea727b5.html" ,
+               "U15 F" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e4c67b5e6211f1bb227b5.html" ,
                               
-               "U13 M" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e41aeb5e6211f09c327b5.html" ,
+               "U13 M" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e4d83b5e6211f1ea627b5.html" ,
                
-               "U11" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e434fb5e6211f0d6127b5.html" 
+               "U11" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e4d8ab5e6211f1eaf27b5.html" 			   
+			   
+			   
+#               "U17" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e41b3b5e6211f09d727b5.html" ,
+               
+#               "U15 M1" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e41a3b5e6211f09af27b5.html" ,
+#               "U15 M2" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e41a7b5e6211f09b827b5.html" ,
+#               "U15 F" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e42d0b5e6211f0cb827b5.html" ,
+                              
+#               "U13 M" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e41aeb5e6211f09c327b5.html" ,
+               
+#               "U11" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e434fb5e6211f0d6127b5.html" 
                 
                }
 
