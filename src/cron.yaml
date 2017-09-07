@@ -1,10 +1,13 @@
 cron:
-- description: Clean database
-  url: /delete
-  schedule: every day 01:00
+# SPCOC Basket : Clean Database (match/result)
+#- description: Clean database
+#  url: /delete
+#  schedule: every day 01:00
+# SPCOC Basket : Init Database (match/result)
 - description: Init database
   url: /init
-  schedule: every day 01:01
+  schedule: every day 01:05
+# Check that all the Website are up and running
 - description: Check Website
   url: /check
   schedule: every 5 mins

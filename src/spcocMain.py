@@ -4,6 +4,7 @@ import spcoc
 import os
 import jinja2
 import check
+from google.appengine.api import mail
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -78,6 +79,7 @@ class InitPage(webapp2.RequestHandler):
         journees = spcoc.cleanDB()        
         journees = spcoc.addAllMatchInDB()
         self.redirect("/")
+        sendMail("Init Page")
         #self.response.out.write("Init matches Done.")
         
 class UpdatePage(webapp2.RequestHandler):
@@ -107,6 +109,7 @@ class InitEquipe(webapp2.RequestHandler):
 
     def get(self):
          spcoc.initEquipe()
+         self.redirect("/")
 
 class DisplayEquipe(webapp2.RequestHandler):
     
@@ -153,6 +156,16 @@ class TestPage(webapp2.RequestHandler):
         self.response.out.write("Init matches Done.")
 
 
+def sendMail(message):
+    user_address = 'pbourachot@gmail.com'
+    sender_address = 'pbourachot@gmail.com'
+    subject = "Log"
+    body = message
+    send = True 
+
+    if (send):
+        mail.send_mail(sender_address, user_address, subject, body)
+
 app = webapp2.WSGIApplication([('/', MainPage),
                                ('/delete', DeletePage),
                                ('/init', InitPage),
@@ -161,13 +174,16 @@ app = webapp2.WSGIApplication([('/', MainPage),
                                ('/admin', AdminPage),
                                ('/update', UpdatePage),
                                ('/stats', StatsPage),
-                               ('/check', Check), 
                                
                                # Equipe management
                                ('/initEquipe', InitEquipe),
                                ('/displayEquipe', DisplayEquipe),
                                ('/addEquipe', AddEquipe),
                                ('/deleteEquipe', DeleteEquipe),
+                               
+                               # Check
+                               ('/check', Check), 
+                               
                                
                                
                                ]

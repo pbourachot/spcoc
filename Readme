@@ -1,5 +1,5 @@
 == Command to deploy application ==
-
+cd src
 gcloud app deploy --project spcoc-1084 --version 2
 
 
