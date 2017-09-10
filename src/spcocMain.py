@@ -79,7 +79,8 @@ class InitPage(webapp2.RequestHandler):
         journees = spcoc.cleanDB()        
         journees = spcoc.addAllMatchInDB()
         self.redirect("/")
-        sendMail("Init Page")
+        #sendMail("Init Page")
+        
         #self.response.out.write("Init matches Done.")
         
 class UpdatePage(webapp2.RequestHandler):

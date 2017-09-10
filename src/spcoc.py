@@ -70,8 +70,7 @@ def findVainqueur(score):
     return vainqueur
 
 
-def score(score):
-    print score
+def score(score):    
     score1S = -1;    
     score2S = -1;
     index = score.index('-')
@@ -155,7 +154,8 @@ class MyHTMLParser(HTMLParser):
         
         self.plan = None
     
-    def handle_starttag(self, tag, attrs):        
+    def handle_starttag(self, tag, attrs): 
+               
         if (tag == 'tr') :
             displayNone = False
             # and 'class' in attrs and (attrs['class'] == "altern-2" or attrs['class'] == "no-altern-2") ) :
@@ -187,7 +187,9 @@ class MyHTMLParser(HTMLParser):
                         self.plan = a[1]
                     
     def handle_endtag(self, tag):        
-        if (tag == 'tr' and self.nextIsReferee):                             
+        
+        if (tag == 'tr' and self.nextIsReferee):  
+            
             if (len(self.data)> 0):                                   
                 if (self.category):                    
                     addMatchInDB(self.category, self.data, self.referee, self.plan)
@@ -208,14 +210,14 @@ class MyHTMLParser(HTMLParser):
         if (self.dataReferee):            
             self.referee = data
         
-    def listOfMatches(self, html):
-        
+    def listOfMatches(self, html):        
         self.feed(html)
         return self.matches[:]
     
-    def listOfMatches2(self, html, category):
+    def createMatchInDB(self, html, category):        
         self.category = category
         self.feed(html)
+        return self.matches[:]
         
         
 
@@ -238,12 +240,20 @@ def matchesFromDate(date, matches):
 
 
 # Return list of match from date to date + end
-def returnComingMatch(date = datetime.datetime.now(),  end =  7 ):
+def returnComingMatchFromDate(date = datetime.datetime.now(),  end =  7 ):
     
     query = Match.query(ndb.AND(Match.fullDate >= date),
             Match.fullDate < date + datetime.timedelta(days=end)).order(Match.fullDate)
     
     return query.fetch()
+
+# Return 8 next matches
+def returnComingNextMatch(date = datetime.datetime.now()):
+    
+    query = Match.query(ndb.AND(Match.fullDate >= date)).order(Match.fullDate)
+    
+    return query.fetch(8)
+
 
 # Return list of match from date to date + end
 def returnPreviousMatch(date = datetime.datetime.now(),  beginning =  7 ):
@@ -282,7 +292,7 @@ def display(result):
                     output += matchTuple[0]  + "\n"
                     output += matchTuple[2].__str__() + "\n"
                     
-    print output                
+                    
     return output
     
 
@@ -299,7 +309,7 @@ def matchDeLaSemaine(matchesURL = matchesURL):
     
     journee = {}
     
-    filteredReturnComingMatch = removeExempt(returnComingMatch()) 
+    filteredReturnComingMatch = removeExempt(returnComingNextMatch()) 
 
     for m in filteredReturnComingMatch :
         m = updateGueriniere(m)
@@ -368,10 +378,12 @@ def AllMatchesAtHome(matchesURL = matchesURL):
 
 def addAllMatchInDB():
     for equipe in matchesURL :
-        parser = MyHTMLParser()
+        parser = MyHTMLParser()        
         f = urllib.urlopen(matchesURL[equipe])               
         html = f.readline()
-        parser.listOfMatches2(html,equipe)
+        
+        parser.createMatchInDB(html,equipe)
+        
         f.close()
         parser.close()
 
