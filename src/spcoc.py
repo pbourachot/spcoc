@@ -8,11 +8,11 @@ import datetime
 import collections
 
 
-from spcocModel import Equipe
+#from spcocModel import Equipe
 
-from google.appengine.ext.db import Key
-from google.appengine.ext import ndb
-from gettext import Catalog
+#from google.appengine.ext.db import Key
+#from google.appengine.ext import ndb
+#from gettext import Catalog
 
 JOUR_DE_LA_SEMAINE = ("Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche")
 
