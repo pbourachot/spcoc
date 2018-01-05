@@ -16,21 +16,32 @@ from gettext import Catalog
 
 JOUR_DE_LA_SEMAINE = ("Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche")
 
- 
+'''
+ PRE REGIONALE SENIORS MASCULINS(Poule A) => http://resultats.ffbb.com/championnat/equipe/division/b5e6211e6ce3b5e6211f4bc327b5.html
+ DEPARTEMENTALE HONNEUR SENIOR MASCULIN(Poule C) => http://resultats.ffbb.com/championnat/equipe/division/b5e6211e7266b5e6211f584a27b5.html
+ DEPARTEMENTALE U15 MASCULIN EXCELLENCE(Poule A) => http://resultats.ffbb.com/championnat/equipe/division/b5e6211e7d29b5e6211f6a3427b5.html
+ DEPARTEMENTALE U15 MASCULIN PRE HONNEUR(Poule A) => http://resultats.ffbb.com/championnat/equipe/division/b5e6211e7d2cb5e6211f6a3727b5.html
+ DEPARTEMENTALE U17 MASCULIN PRE EXCELLENCE HAUTE(Poule A) => http://resultats.ffbb.com/championnat/equipe/division/b5e6211e7fc9b5e6211f709627b5.html
+ DEPARTEMENTALE U13 MASCULIN EXCELLENCE(Poule A) => http://resultats.ffbb.com/championnat/equipe/division/b5e6211e7fbcb5e6211f708727b5.html
+ DEPARTEMENTALE U11 MASCULIN PRE EXCELLENCE HAUTE(Poule A) => http://resultats.ffbb.com/championnat/equipe/division/b5e6211e7fa2b5e6211f704427b5.html
+ DEPARTEMENTALE U15 FEMININ PRE EXCELLENCE(Poule A) => http://resultats.ffbb.com/championnat/equipe/division/b5e6211e7d27b5e6211f6a3027b5.html
+ DEPARTEMENTALE U13 FEMININ PRE EXELLENCE(Poule A) => http://resultats.ffbb.com/championnat/equipe/division/b5e6211e7fb1b5e6211f705a27b5.html
+ '''
 
 matchesURL = { "SM 1" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e6ce3b5e6211f4bc327b5.html",
                "SM 2" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e7266b5e6211f584a27b5.html",
-                "U11" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e72c7b5e6211f590127b5.html",
-                "U13" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e730fb5e6211f596627b5.html",
+               
+                "U11" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e7fa2b5e6211f704427b5.html",
+                "U13" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e7fbcb5e6211f708727b5.html",
                 
                 
-                 "U15 Stam" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e7319b5e6211f597927b5.html",
-               "U15 Rob" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e7319b5e6211f597a27b5.html",
+                 "U15 Stam" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e7d29b5e6211f6a3427b5.html",
+               "U15 Rob" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e7d2cb5e6211f6a3727b5.html",
      
-                "U17" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e731db5e6211f597f27b5.html",
+                "U17" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e7fc9b5e6211f709627b5.html",
                 
-                "U15 F" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e72bdb5e6211f58ee27b5.html",
-               "U13 F" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e7325b5e6211f598c27b5.html"
+                "U15 F" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e7d27b5e6211f6a3027b5.html",
+               "U13 F" : "http://resultats.ffbb.com/championnat/equipe/division/b5e6211e7fb1b5e6211f705a27b5.html"
                
                 
                }
