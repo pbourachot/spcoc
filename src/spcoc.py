@@ -8,6 +8,16 @@ import datetime
 import collections
 
 
+# For Logging
+#import google.cloud.logging
+#client = google.cloud.logging.Client()
+#client.setup_logging()
+import logging
+
+logging.warn("TEST")
+
+
+
 from spcocModel import Equipe
 
 from google.appengine.ext.db import Key
@@ -250,8 +260,13 @@ def returnComingMatchFromDate(date = datetime.datetime.now(),  end =  7 ):
     return query.fetch()
 
 # Return 8 next matches
-def returnComingNextMatch(date = datetime.datetime.now()):
-    
+def returnComingNextMatch(date = None):
+
+
+    if (date == None):
+        date = datetime.datetime.now()
+    logging.warn("ReturningCommingNextMatch ")
+    logging.warn(date)
     query = Match.query(ndb.AND(Match.fullDate >= date)).order(Match.fullDate)
     
     return query.fetch(8)
